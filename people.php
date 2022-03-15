@@ -1,5 +1,5 @@
 <?php
-
+include('head.php');
 // Get DB connection
 require 'db.php';
 // Create SQL query to get all rows from a table
@@ -12,7 +12,8 @@ if ( $people->rowCount() > 0 ){
     // Loop till there are no more rows
     while ( $row = $people->fetch() ) {
         // Echo the data
-        echo "<li>" . $row["firstname"] . "</li>";
+        echo "<li>" . $row["firstname"] . " " . $row["lastname"]. "</li>";
     }
     echo "</ul>";
 }
+include('foot.php');
