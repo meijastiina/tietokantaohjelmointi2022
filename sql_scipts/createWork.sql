@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS work_time;
 CREATE TABLE work_time(
     id int NOT NULL PRIMARY KEY AUTO_INCREMENT,
     starttime DATETIME,
