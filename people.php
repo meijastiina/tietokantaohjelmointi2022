@@ -17,7 +17,7 @@ if ( $people->rowCount() > 0 ){
         echo "<li>" . $row["firstname"] . " " . $row["lastname"]. "</li>";
     }
     echo "</ul>";
-    echo '<a class="btn btn-primary" href="user.php" role="button">Add person</a>';
+    echo '<a class="btn btn-primary" href="person.php" role="button">Add person</a>';
 
 }
 
