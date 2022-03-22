@@ -17,6 +17,8 @@ if ( $people->rowCount() > 0 ){
         echo "<li>" . $row["firstname"] . " " . $row["lastname"]. "</li>";
     }
     echo "</ul>";
+    echo '<a class="btn btn-primary" href="user.html" role="button">Add person</a>';
+
 }
 
 //Tässä toinen tapa käydä kyselyn tulos läpi:
