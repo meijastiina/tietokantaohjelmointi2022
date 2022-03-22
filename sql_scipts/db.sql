@@ -14,6 +14,9 @@ CREATE TABLE worktime(
     ID int NOT NULL PRIMARY KEY AUTO_INCREMENT,
     start_time DATETIME,
     end_time DATETIME,
-    person_id INT FOREIGN KEY REFERENCES person(ID),
-    task_description TEXT
+    task_description TEXT,
+    person_id INT,
+    
+    CONSTRAINT `fk_person`
+    FOREIGN KEY (person_id) REFERENCES person(id)
 );
