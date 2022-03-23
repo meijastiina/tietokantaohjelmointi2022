@@ -1,6 +1,6 @@
 <?php
 include('head.php');
-    echo '<form action="addworktime.php" method="post">';
+    echo '<form action="add_worktime.php" method="post">';
     // Get users from DB to a dropdown list
     // Get DB connection
     require 'db.php';
