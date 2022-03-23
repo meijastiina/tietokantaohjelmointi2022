@@ -1,7 +1,25 @@
 <?php
 include('head.php');
     echo '<form action="add_worktime.php" method="post">';
-    // Get users from DB to a dropdown list
+    
+    createDropdownList();
+
+    echo'<label for="startTime">Start time:</label><br>
+        <input type="datetime-local" name="startTime" id="startTime"><br>
+        <label for="endTime">End time:</label><br>
+        <input type="datetime-local" name="endTime" id="endTime"><br>
+        
+        <label for="taskDescription">Description:</label>
+        <textarea id="taskDescription" name="taskDescription"></textarea><br/>
+        <input type="submit" class="btn btn-primary" value="Add worktime">
+    </form>';
+
+include('foot.php');
+
+/**
+ * Get users from the database to a dropdown list
+ */
+function createDropdownList(){
     // Get DB connection
     require 'db.php';
     // Create SQL query to get all rows from a table
@@ -20,14 +38,6 @@ include('head.php');
         echo "</select><br/>";
 
     }
+}
 
-    echo'<label for="startTime">Start time:</label><br>
-        <input type="datetime-local" name="startTime" id="startTime"><br>
-        <label for="endTime">End time:</label><br>
-        <input type="datetime-local" name="endTime" id="endTime"><br>
-        
-        <label for="taskDescription">Description:</label>
-        <textarea id="taskDescription" name="taskDescription"></textarea><br/>
-        <input type="submit" class="btn btn-primary" value="Add worktime">
-    </form>';
-include('foot.php');
+
