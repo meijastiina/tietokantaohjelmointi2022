@@ -11,7 +11,7 @@ function getWorktimes($pid){
     $diff = "TIMEDIFF(end_time,start_time) as timediff";
    
     //Haetaan tiedot ja aikaerot henkilölle
-    $sql = "SELECT start_time, end_time, task_description, TIMEDIFF(end_time,start_time) as timediff; FROM worktime WHERE person_id=?";
+    $sql = "SELECT start_time, end_time, task_description, TIMEDIFF(end_time,start_time) as timediff FROM worktime WHERE person_id=?";
  
     $statement = $pdo->prepare($sql);
     $statement->bindParam(1, $pid);
