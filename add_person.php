@@ -1,15 +1,16 @@
 <?php
 require 'db.php'; // DB connection
 
-//Tarkistetaan onko parametreja asetettu
-if( !isset($_POST["fname"]) || !isset($_POST["lname"]) ){
+//Filtteroidaan POST-inputit (ei käytetä string-filtteriä, koska deprekoitunut)
+//Jos parametria ei löydy, funktio palauttaa null
+$fname = filter_input(INPUT_POST, "fname");
+$lname = filter_input(INPUT_POST, "lname");
+
+//Tarkistetaan onko muttujia asetettu
+if( !isset($fname) || !isset($lname) ){
     echo "Parametreja puuttui!! Ei voida lisätä henkilöä";
     exit;
 }
-
-//Haetaan parametrit muuttujiin. Parametrin nimi tulee lomake-inputin name-atribuutista
-$fname = $_POST["fname"];
-$lname = $_POST["lname"];
 
 //Tarkistetaan, ettei tyhjiä arvoja muuttujissa
 if( empty($fname) || empty($lname) ){
@@ -19,8 +20,13 @@ if( empty($fname) || empty($lname) ){
 
 try{
     //Suoritetaan parametrien lisääminen tietokantaan.
-    $sql = "INSERT INTO person (firstname, lastname) VALUES ('$fname', '$lname')";
-    $pdo->exec($sql);
+    $sql = "INSERT INTO person (firstname, lastname) VALUES (?, ?)";
+    $statement = $pdo->prepare($sql);
+    $statement->bindParam(1, $fname);
+    $statement->bindParam(2, $lname);
+
+    $statement->execute();
+
     echo "Tervetuloa ".$fname." ".$lname.". Sinut on lisätty tietokantaan"; 
 }catch(PDOException $e){
     echo "Käyttäjää ei voitu lisätä<br>";
