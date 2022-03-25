@@ -1,8 +1,10 @@
 <?php
 include('head.php');
+include('person_dropdown.php');
+
     echo '<form action="add_worktime.php" method="post">';
     
-    include('user_dropdown.php');
+    personDropdown();
 
     echo'<label for="startTime">Start time:</label><br>
         <input type="datetime-local" name="startTime" id="startTime"><br>
