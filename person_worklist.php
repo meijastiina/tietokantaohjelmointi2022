@@ -1,15 +1,24 @@
 <?php
     include 'head.php';
     include 'worktime_table.php';
+    include 'person_dropdown.php';
+
+    //Haetaan henkilön ID post-parametreista (jos asetettu)
+    $personID = filter_input(INPUT_POST, "person", FILTER_SANITIZE_NUMBER_INT);
 
     //Luodaan lomake henkilöiden vetovalikolla.
-    //Kaavake kutsuu sivua uudelleen valitun henkilön id:llä
+    //Submit kutsuu sivua uudelleen valitun henkilön id:llä
     echo "<form action='person_worklist.php' method='post'>";
-    include 'user_dropdown.php';
+
+    if(isset($personID)){
+        personDropdown($personID);
+    }else{
+        personDropdown();
+    }
+    
     echo "<input type='submit' value='Get work list'></form>";
  
-    //Jos henkilön id asetettu post-parametriksi, haetaan tiedot taulukkoon
-    $personID = filter_input(INPUT_POST, "person", FILTER_SANITIZE_NUMBER_INT);
+    //Haetaan henkilön työajat tauluun, jos ID asetettu
     if(isset($personID)){
         getWorktimes($personID);
     }
