@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Creates a dropdown from database names
+ * and sets the selected person by parameter id.
+ */
 function personDropdown($selectedId = -1){
     // Get DB connection
     require 'db.php';
@@ -12,8 +16,8 @@ function personDropdown($selectedId = -1){
     if ( $people->rowCount() > 0 ){
         echo '<label for="person">Select person:</label>
         <select name="person" id="person">';
-        // Loop till there are no more rows
 
+        // Loop till there are no more rows
         foreach($people as $row){
             echo '<option value="'
                 . $row["ID"] .'"'
@@ -23,7 +27,6 @@ function personDropdown($selectedId = -1){
                 .'</option>';
         }
         echo "</select><br/>";
-
     }
 }
 
