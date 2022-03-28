@@ -10,11 +10,7 @@
     //Submit kutsuu sivua uudelleen valitun henkilön id:llä
     echo "<form action='person_worklist.php' method='post'>";
 
-    if(isset($personID)){
-        personDropdown($personID);
-    }else{
-        personDropdown();
-    }
+    personDropdown($personID);
     
     echo "<input type='submit' value='Get work list'></form>";
  
