@@ -27,9 +27,6 @@ try{
     $statement->execute( array($personID, $startTime, $endTime, $taskDescription) );
 
     echo "Worktime logged<br><br>";
-
-    getWorktimes($personID, $pdo);
-
 }catch(PDOException $e){
     echo "Unable to add worktime";
     echo $e->getMessage();
