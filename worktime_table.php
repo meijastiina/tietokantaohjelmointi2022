@@ -5,10 +5,6 @@
  */
 function getWorktimes($pid){
     require('db.php');
-
-    //SQL-kyselyyn lisäys, joka laskee timediff muuttujaan kullekin riville
-    //aikaeron endtime-starttime kellonaikana
-    $diff = "TIMEDIFF(end_time,start_time) as timediff";
    
     //Haetaan tiedot ja aikaerot henkilölle
     $sql = "SELECT start_time, end_time, task_description, TIMEDIFF(end_time,start_time) as timediff FROM worktime WHERE person_id=?";
@@ -19,7 +15,6 @@ function getWorktimes($pid){
 
     $result = $statement->fetchAll();
  
-
     echo "<table class='table table-striped'><tr><th>Task</th><th>Start</th><th>End</th><th>Hours</th></tr>";
     //Luodaan yksi taulukon rivi tietokannan rivistä
     foreach($result as $row){ 
