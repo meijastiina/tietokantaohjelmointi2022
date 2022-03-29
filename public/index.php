@@ -1,4 +1,4 @@
 <?php
-    include('head.php');
+    include('../src/templates/head.php');
     echo "<h1>Welcome!</h1>";
-    include('foot.php');
+    include('../src/templates/foot.php');

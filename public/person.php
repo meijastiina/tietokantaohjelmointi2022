@@ -1,5 +1,5 @@
 <?php
-include('head.php');
+include('../src/templates/head.php');
     echo '<form action="add_person.php" method="post">
         <label for="fname">First name:</label><br>
         <input type="text" name="fname" id="fname"><br>
@@ -7,4 +7,4 @@ include('head.php');
         <input type="text" name="lname" id="lname"><br>
         <input type="submit" class="btn btn-primary" value="Add person">
     </form>';
-include('foot.php');
+include('../src/templates/foot.php');

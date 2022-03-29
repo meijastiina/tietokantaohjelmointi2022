@@ -1,7 +1,7 @@
 <?php
-include('head.php');
+include('../src/templates/head.php');
 // Get DB connection
-require 'db.php';
+require '../src/modules/db.php';
 // Create SQL query to get all rows from a table
 $sql = "SELECT * FROM person";
 // Execute the query
@@ -26,4 +26,4 @@ if ( $people->rowCount() > 0 ){
 //     echo "<li>" . $row["firstname"] . " " . $row["lastname"]. "</li>";
 // }
 
-include('foot.php');
+include('../src/templates/foot.php');

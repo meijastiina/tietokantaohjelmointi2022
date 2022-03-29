@@ -1,5 +1,5 @@
 <?php
-include('head.php');
+include('../src/templates/head.php');
 include('person_dropdown.php');
 
     echo '<form action="add_worktime.php" method="post">';
@@ -16,7 +16,7 @@ include('person_dropdown.php');
         <input type="submit" class="btn btn-primary" value="Add worktime">
     </form>';
 
-include('foot.php');
+include('../src/templates/foot.php');
 
 
 
