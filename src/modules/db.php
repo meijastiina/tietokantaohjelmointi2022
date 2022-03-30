@@ -4,7 +4,7 @@
 //Tässä haetaan tiedot init-tiedostosta. 
 //Voit käyttää myös ylempänä olevaa config.php tiedostoa
 //jos haluat. Kommentoi silloin seuraavat rivit.
-$init = parse_ini_file("../config/conf.ini");
+$init = parse_ini_file($_SERVER['DOCUMENT_ROOT']."/work/conf.ini");
 $host = $init["host"];
 $db = $init["db"];
 $user = $init["username"];
