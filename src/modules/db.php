@@ -4,6 +4,11 @@
 //Tässä haetaan tiedot init-tiedostosta. 
 //Voit käyttää myös ylempänä olevaa config.php tiedostoa
 //jos haluat. Kommentoi silloin seuraavat rivit.
+
+//Vaihda work tilalle oma juurikansio (localhost/work/....)
+//Suora relatiivinen polku kuten ../config/conf.ini ei toimi
+//koska tämä sijainti riippuu siitä mihin selaimelta kutsuttuun 
+//sijaintiin db.php on kytketty (kuten esim. public/people.php tai scr/modules/add_worktime.php)
 $init = parse_ini_file($_SERVER['DOCUMENT_ROOT']."/work/conf.ini");
 $host = $init["host"];
 $db = $init["db"];
