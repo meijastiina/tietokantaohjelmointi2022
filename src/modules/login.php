@@ -1,4 +1,6 @@
 <?php
+    //Käynnistetään sessio, johon talletetaan käyttäjä, jos kirjautuminen onnistuu
+    session_start();
     require('db.php');
 
     $uname = filter_input(INPUT_POST, "username");
@@ -16,11 +18,8 @@
         exit;
     }
 
-    //Lisää tietokantahaku käyttäjänimellä
-    //Kokeile verifioida salasana
-
     try{
-        //Suoritetaan parametrien lisääminen tietokantaan.
+        //Haetaan käyttäjä annetulla käyttäjänimellä
         $sql = "SELECT * FROM person WHERE username=?";
         $statement = $pdo->prepare($sql);
         $statement->bindParam(1, $uname);
@@ -33,12 +32,20 @@
     
         $row = $statement->fetch();
 
+        //Tarkistetaan käyttäjän antama salasana tietokannan salasanaa vasten
         if(!password_verify($pw, $row["password"] )){
             echo "Väärä salasana!!";
             exit;
         }
 
-        echo "Tervetuloa ".$row["firstname"]." ".$row["lastname"].". Olet kirjautunut sisään!"; 
+        //Jos käyttäjä tunnistettu, talletetaan käyttäjän tiedot sessioon
+        $_SESSION["username"] = $uname;
+        $_SESSION["fname"] = $row["firstname"];
+        $_SESSION["lname"] = $row["lastname"];
+
+        //Ohjataan takaisin etusivulle
+        header("Location: ../../public/index.php"); 
+
     }catch(PDOException $e){
         echo "Kirjautuminen ei onnistunut<br>";
         echo $e->getMessage();
