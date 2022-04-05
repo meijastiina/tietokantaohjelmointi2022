@@ -17,7 +17,7 @@ CREATE TABLE worktime(
     start_time DATETIME,
     end_time DATETIME,
     task_description TEXT,
-    person_id INT,
+    person_id INT NOT NULL,
     
     CONSTRAINT `fk_person`
     FOREIGN KEY (person_id) REFERENCES person(id)
