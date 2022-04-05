@@ -24,6 +24,21 @@
             <li class="nav-item">
             <a class="nav-link" href="people.php">People</a>
             </li>
+            <li class="nav-item">
+            <a class="nav-link" href="person.php">Add new employee</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" href="worktime.php">Add new work time</a>
+            </li>
+            <li class="nav-item">
+            <?php 
+                if(isset($_SESSION["username"])){
+                    echo '<a class="nav-link bg-danger" href="logout.php">Log out</a>';
+                }else{
+                    echo '<a class="nav-link bg-success" href="login.php">Log in</a>';
+                }
+            ?>
+            </li>
         </ul>
         </div>
     </div>
