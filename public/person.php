@@ -10,8 +10,13 @@ include MODULES_DIR.'person.php';
     $pw = filter_input(INPUT_POST, "password");
 
     if(isset($fname)){
-        addPerson($fname, $lname, $uname, $pw);
-        echo '<div class="alert alert-success" role="alert">Person added!!</div>';
+        try{
+            addPerson($fname, $lname, $uname, $pw);
+            echo '<div class="alert alert-success" role="alert">Person added!!</div>';
+        }catch(Exception $e){
+            echo '<div class="alert alert-danger" role="alert">'.$e->getMessage().'</div>';
+        }
+        
     }
 
 ?>

@@ -8,14 +8,12 @@ function login($uname, $pw){
 
     //Tarkistetaan onko muttujia asetettu
     if( !isset($uname) || !isset($pw) ){
-        echo "Parametreja puuttui!! Ei voida kirjautua.";
-        exit;
+        throw new Exception("Missing parameters. Cannot log in.");
     }
 
     //Tarkistetaan, ettei tyhjiä arvoja muuttujissa
     if( empty($uname) || empty($pw) ){
-        echo "Et voi asettaa tyhjiä arvoja!!";
-        exit;
+        throw new Exception("Cannot log in with empty values.");
     }
 
     try{
@@ -27,16 +25,14 @@ function login($uname, $pw){
         $statement->execute();
 
         if($statement->rowCount() <=0){
-            echo "Käyttäjää ei löydy!!";
-            exit;
+            throw new Exception("Person not found! Cannot log in!");
         }
 
         $row = $statement->fetch();
 
         //Tarkistetaan käyttäjän antama salasana tietokannan salasanaa vasten
         if(!password_verify($pw, $row["password"] )){
-            echo "Väärä salasana!!";
-            exit;
+            throw new Exception("Wrong password!!");
         }
 
         //Jos käyttäjä tunnistettu, talletetaan käyttäjän tiedot sessioon
@@ -45,16 +41,19 @@ function login($uname, $pw){
         $_SESSION["lname"] = $row["lastname"];
 
     }catch(PDOException $e){
-        echo "Kirjautuminen ei onnistunut<br>";
-        echo $e->getMessage();
+        throw $e;
     }
 
 }
 
 function logout(){
     //Tyhjennetään ja tuhotaan nykyinen sessio.
-    session_unset();
-    session_destroy();
+    try{
+        session_unset();
+        session_destroy();
+    }catch(Exception $e){
+        throw $e;
+    }
 }
 
 ?>

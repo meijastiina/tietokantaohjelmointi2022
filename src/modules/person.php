@@ -3,13 +3,17 @@
 function getPeople(){
     require_once MODULES_DIR.'db.php';
 
-    $pdo = getPdoConnection();
-    // Create SQL query to get all rows from a table
-    $sql = "SELECT * FROM person";
-    // Execute the query
-    $people = $pdo->query($sql);
+    try{
+        $pdo = getPdoConnection();
+        // Create SQL query to get all rows from a table
+        $sql = "SELECT * FROM person";
+        // Execute the query
+        $people = $pdo->query($sql);
 
-    return $people->fetchAll();
+        return $people->fetchAll();
+    }catch(PDOException $e){
+        throw $e;
+    }
 }
 
 function addPerson($fname, $lname, $uname, $pw){
@@ -17,14 +21,12 @@ function addPerson($fname, $lname, $uname, $pw){
     
     //Tarkistetaan onko muttujia asetettu
     if( !isset($fname) || !isset($lname) || !isset($uname) || !isset($pw) ){
-        echo "Parametreja puuttui!! Ei voida lisätä henkilöä";
-        exit;
+        throw new Exception("Missing parameters! Cannot add person!");
     }
     
     //Tarkistetaan, ettei tyhjiä arvoja muuttujissa
     if( empty($fname) || empty($lname) || empty($uname) || empty($pw) ){
-        echo "Et voi asettaa tyhjiä arvoja!!";
-        exit;
+        throw new Exception("Cannot set empty values!");
     }
     
     try{
@@ -44,8 +46,7 @@ function addPerson($fname, $lname, $uname, $pw){
     
         echo "Tervetuloa ".$fname." ".$lname.". Sinut on lisätty tietokantaan"; 
     }catch(PDOException $e){
-        echo "Käyttäjää ei voitu lisätä<br>";
-        echo $e->getMessage();
+        throw $e;
     }
 }
 
