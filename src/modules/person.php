@@ -14,13 +14,6 @@ function getPeople(){
 
 function addPerson($fname, $lname, $uname, $pw){
     require_once MODULES_DIR.'db.php'; // DB connection
-
-    //Filtteroidaan POST-inputit (ei käytetä string-filtteriä, koska deprekoitunut)
-    //Jos parametria ei löydy, funktio palauttaa null
-    // $fname = filter_input(INPUT_POST, "fname");
-    // $lname = filter_input(INPUT_POST, "lname");
-    // $uname = filter_input(INPUT_POST, "username");
-    // $pw = filter_input(INPUT_POST, "password");
     
     //Tarkistetaan onko muttujia asetettu
     if( !isset($fname) || !isset($lname) || !isset($uname) || !isset($pw) ){

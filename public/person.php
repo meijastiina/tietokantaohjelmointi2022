@@ -1,6 +1,22 @@
 <?php
-include('../src/templates/head.php');
-    echo '<form action="add_person.php" method="post">
+include TEMPLATES_DIR.'head.php';
+include MODULES_DIR.'person.php';
+
+    //Filtteroidaan POST-inputit (ei käytetä string-filtteriä, koska deprekoitunut)
+    //Jos parametria ei löydy, funktio palauttaa null
+    $fname = filter_input(INPUT_POST, "fname");
+    $lname = filter_input(INPUT_POST, "lname");
+    $uname = filter_input(INPUT_POST, "username");
+    $pw = filter_input(INPUT_POST, "password");
+
+    if(isset($fname)){
+        addPerson($fname, $lname, $uname, $pw);
+        echo '<div class="alert alert-success" role="alert">Person added!!</div>';
+    }
+
+?>
+
+    <form action="person.php" method="post">
         <label for="fname">First name:</label><br>
         <input type="text" name="fname" id="fname"><br>
         <label for="lname">Last name:</label><br>
@@ -10,5 +26,6 @@ include('../src/templates/head.php');
         <label for="password">Password:</label><br>
         <input type="password" name="password" id="password"><br>
         <input type="submit" class="btn btn-primary" value="Add person">
-    </form>';
-include('../src/templates/foot.php');
+    </form>
+
+<?php   include TEMPLATES_DIR.'foot.php'; ?>
