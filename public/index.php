@@ -1,14 +1,12 @@
 <?php
-    //Käynnistetään sessio
-    session_start();
-    include('../src/templates/head.php');
+
+    include TEMPLATES_DIR.'head.php';
 
     //Tarkistetaan onko sessioon asetettu käyttäjä.
-    //Jos ei, ohjataan login-sivulle.
     if(isset($_SESSION["username"])){
         echo "<h1>Welcome ".$_SESSION["fname"]." ".$_SESSION["lname"]."</h1>";
     }else{
-        header("Location: login_view.php");
+        echo "<h1>Welcome! You may log in to use advanced features!</h1>";
     }
 
-    include('../src/templates/foot.php');
+    include TEMPLATES_DIR.'foot.php';

@@ -1,10 +1,10 @@
 <?php
-    //Käynnistetään sessio, johon talletetaan käyttäjä, jos kirjautuminen onnistuu
-    session_start();
-    require('db.php');
+function login($uname, $pw){
 
-    $uname = filter_input(INPUT_POST, "username");
-    $pw = filter_input(INPUT_POST, "password");
+    require_once MODULES_DIR.'db.php';
+
+    // $uname = filter_input(INPUT_POST, "username");
+    // $pw = filter_input(INPUT_POST, "password");
 
     //Tarkistetaan onko muttujia asetettu
     if( !isset($uname) || !isset($pw) ){
@@ -19,6 +19,7 @@
     }
 
     try{
+        $pdo = getPdoConnection();
         //Haetaan käyttäjä annetulla käyttäjänimellä
         $sql = "SELECT * FROM person WHERE username=?";
         $statement = $pdo->prepare($sql);
@@ -29,7 +30,7 @@
             echo "Käyttäjää ei löydy!!";
             exit;
         }
-    
+
         $row = $statement->fetch();
 
         //Tarkistetaan käyttäjän antama salasana tietokannan salasanaa vasten
@@ -43,12 +44,17 @@
         $_SESSION["fname"] = $row["firstname"];
         $_SESSION["lname"] = $row["lastname"];
 
-        //Ohjataan takaisin etusivulle
-        header("Location: ../../public/index.php"); 
-
     }catch(PDOException $e){
         echo "Kirjautuminen ei onnistunut<br>";
         echo $e->getMessage();
     }
+
+}
+
+function logout(){
+    //Tyhjennetään ja tuhotaan nykyinen sessio.
+    session_unset();
+    session_destroy();
+}
 
 ?>
