@@ -1,6 +1,6 @@
 <?php
 
-function getPersons(){
+function getPeople(){
     require_once MODULES_DIR.'db.php';
 
     $pdo = getPdoConnection();
