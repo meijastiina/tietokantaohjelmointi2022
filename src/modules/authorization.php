@@ -19,7 +19,7 @@ function login($uname, $pw){
     try{
         $pdo = getPdoConnection();
         //Haetaan käyttäjä annetulla käyttäjänimellä
-        $sql = "SELECT * FROM person WHERE username=?";
+        $sql = "SELECT username, password, firstname, lastname FROM person WHERE username=?";
         $statement = $pdo->prepare($sql);
         $statement->bindParam(1, $uname);
         $statement->execute();
