@@ -31,6 +31,9 @@
             <a class="nav-link" href="worktime.php">Add new work time</a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="worklist.php">Worktime Report</a>
+            </li>
+            <li class="nav-item">
             <?php 
                 if(isset($_SESSION["username"])){
                     echo '<a class="nav-link bg-danger" href="logout.php">Log out</a>';

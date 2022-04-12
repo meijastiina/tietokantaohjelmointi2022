@@ -29,3 +29,19 @@ function addWorktime($personID, $startTime, $endTime, $taskDescription){
     }
 
 }
+
+function getWorktimeReport(){
+    require_once MODULES_DIR.'db.php';
+
+    try{
+        $pdo = getPdoConnection();
+        // Create SQL query to get all rows from a table
+        $sql = "SELECT start_time, end_time FROM worktime";
+        // Execute the query
+        $worktime = $pdo->query($sql);
+
+        return $worktime->fetchAll();
+    }catch(PDOException $e){
+        throw $e;
+    }
+}
