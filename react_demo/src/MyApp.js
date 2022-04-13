@@ -46,7 +46,6 @@ export function Register(){
     function handleSubmit(e){
       e.preventDefault();
 
-      
       const baseCred = Buffer.from(username+':'+password, 'utf8').toString('base64');
       axios.defaults.withCredentials = true;
       axios.post("http://localhost/login.php",null, {headers: {'Authorization': 'Basic ' + baseCred }})
@@ -67,10 +66,6 @@ export function Register(){
     </div>
   }
 
-  function getStaff(myState){
-
-    
-}
 
 export function People(){
 
@@ -81,7 +76,6 @@ export function People(){
     .then(resp => setInfo(resp.data))
     .catch(e=> console.log(e))
   })
-
 
   let i = 0;
 
